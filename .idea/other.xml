@@ -15,6 +15,30 @@
           <option name="screenY" value="1280" />
         </PersistentDeviceSelectionData>
         <PersistentDeviceSelectionData>
+          <option name="api" value="30" />
+          <option name="brand" value="google" />
+          <option name="codename" value="redfin" />
+          <option name="id" value="redfin" />
+          <option name="manufacturer" value="Google" />
+          <option name="name" value="Pixel 5" />
+          <option name="screenDensity" value="440" />
+          <option name="screenX" value="1080" />
+          <option name="screenY" value="2340" />
+          <option name="selected" value="true" />
+        </PersistentDeviceSelectionData>
+        <PersistentDeviceSelectionData>
+          <option name="api" value="31" />
+          <option name="brand" value="google" />
+          <option name="codename" value="oriole" />
+          <option name="id" value="oriole" />
+          <option name="manufacturer" value="Google" />
+          <option name="name" value="Pixel 6" />
+          <option name="screenDensity" value="420" />
+          <option name="screenX" value="1080" />
+          <option name="screenY" value="2400" />
+          <option name="selected" value="true" />
+        </PersistentDeviceSelectionData>
+        <PersistentDeviceSelectionData>
           <option name="api" value="28" />
           <option name="brand" value="DOCOMO" />
           <option name="codename" value="SH-01L" />
@@ -46,6 +70,7 @@
           <option name="screenDensity" value="420" />
           <option name="screenX" value="1080" />
           <option name="screenY" value="2400" />
+          <option name="selected" value="true" />
         </PersistentDeviceSelectionData>
         <PersistentDeviceSelectionData>
           <option name="api" value="33" />
@@ -68,6 +93,7 @@
           <option name="screenDensity" value="420" />
           <option name="screenX" value="1080" />
           <option name="screenY" value="2400" />
+          <option name="selected" value="true" />
         </PersistentDeviceSelectionData>
         <PersistentDeviceSelectionData>
           <option name="api" value="29" />
@@ -134,6 +160,7 @@
           <option name="screenDensity" value="390" />
           <option name="screenX" value="1008" />
           <option name="screenY" value="2244" />
+          <option name="selected" value="true" />
         </PersistentDeviceSelectionData>
         <PersistentDeviceSelectionData>
           <option name="api" value="30" />
@@ -156,17 +183,7 @@
           <option name="screenDensity" value="420" />
           <option name="screenX" value="1080" />
           <option name="screenY" value="2400" />
-        </PersistentDeviceSelectionData>
-        <PersistentDeviceSelectionData>
-          <option name="api" value="31" />
-          <option name="brand" value="google" />
-          <option name="codename" value="oriole" />
-          <option name="id" value="oriole" />
-          <option name="manufacturer" value="Google" />
-          <option name="name" value="Pixel 6" />
-          <option name="screenDensity" value="420" />
-          <option name="screenX" value="1080" />
-          <option name="screenY" value="2400" />
+          <option name="selected" value="true" />
         </PersistentDeviceSelectionData>
         <PersistentDeviceSelectionData>
           <option name="api" value="33" />
@@ -178,6 +195,7 @@
           <option name="screenDensity" value="420" />
           <option name="screenX" value="1080" />
           <option name="screenY" value="2400" />
+          <option name="selected" value="true" />
         </PersistentDeviceSelectionData>
         <PersistentDeviceSelectionData>
           <option name="api" value="31" />
@@ -214,17 +232,6 @@
           <option name="type" value="WEAR_OS" />
         </PersistentDeviceSelectionData>
         <PersistentDeviceSelectionData>
-          <option name="api" value="30" />
-          <option name="brand" value="google" />
-          <option name="codename" value="redfin" />
-          <option name="id" value="redfin" />
-          <option name="manufacturer" value="Google" />
-          <option name="name" value="Pixel 5" />
-          <option name="screenDensity" value="440" />
-          <option name="screenX" value="1080" />
-          <option name="screenY" value="2340" />
-        </PersistentDeviceSelectionData>
-        <PersistentDeviceSelectionData>
           <option name="api" value="34" />
           <option name="brand" value="google" />
           <option name="codename" value="shiba" />
@@ -234,6 +241,7 @@
           <option name="screenDensity" value="420" />
           <option name="screenX" value="1080" />
           <option name="screenY" value="2400" />
+          <option name="selected" value="true" />
         </PersistentDeviceSelectionData>
         <PersistentDeviceSelectionData>
           <option name="api" value="33" />
@@ -259,5 +267,6 @@
         </PersistentDeviceSelectionData>
       </list>
     </option>
+    <option name="selectedCloudProject" value="fir-notificationdemo-b1dd5" />
   </component>
 </project>

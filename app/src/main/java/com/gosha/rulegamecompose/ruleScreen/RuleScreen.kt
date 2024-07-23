@@ -1,15 +1,19 @@
 package com.gosha.rulegamecompose.ruleScreen
 
 import android.util.Log
+import android.widget.Toast
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.material3.Button
@@ -17,9 +21,11 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
@@ -30,6 +36,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.gosha.rulegamecompose.R
 import com.gosha.rulegamecompose.utils.ValueList
+import com.gosha.rulegamecompose.utils.BetList
 import kotlin.math.roundToInt
 
 @Composable
@@ -42,6 +49,11 @@ fun RuleScreen() {
     // Состояние для выбранного номера
     var number by remember {
         mutableStateOf(0)
+    }
+
+    // состояние для отрисовки ставки
+    val bet = remember {
+        mutableStateListOf<String>()
     }
 
     // Анимация вращения с длительностью 2000 мс
@@ -80,10 +92,9 @@ fun RuleScreen() {
         Text(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(top = 150.dp)
                 .wrapContentHeight()
                 .wrapContentWidth(),
-            text = number.toString(),
+            text = "Выпало: " + number.toString(),
             fontWeight = FontWeight.Bold,
             fontSize = 35.sp,
             color = textColor
@@ -92,21 +103,85 @@ fun RuleScreen() {
             modifier = Modifier
                 .weight(1f)
                 .fillMaxSize()
+                .padding(top = 10.dp)
         ) {
             // Изображение правила, вращающееся на заданный угол
             Image(
                 painter = painterResource(R.drawable.rule),
                 contentDescription = "Rule",
                 Modifier
-                    .fillMaxSize()
+                    .width(300.dp)
+                    .height(300.dp)
+                    .padding(start = 10.dp)
                     .rotate(angle)
             )
             // Неподвижное изображение указателя
             Image(
                 painter = painterResource(R.drawable.pointer),
                 contentDescription = "Pointer",
-                Modifier.fillMaxSize()
+                Modifier.padding(start = 10.dp).width(300.dp)
+                    .height(300.dp)
             )
+            Column(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalAlignment = Alignment.End
+            ) {
+                //кнопки, которые добавляют текст ставки
+                Button(
+                    onClick = {
+                        if (bet.size < 5) {
+                            if (!bet.contains("Черное")) {
+                                bet.add("Черное")
+                            } else {
+                                Log.d("BlackPick", "Элемент уже существует в списке")
+                            }
+                        } else {
+                            Log.d("BlackPick", "максимально кол-во ставок")
+                        }
+                    },
+                    colors = ButtonDefaults.buttonColors(Color.Black),
+                    modifier = Modifier.padding(end = 14.dp)
+                ) {
+                    Text(text = "Черное",
+                        color = Color.White)
+                }
+                Button(
+                    onClick = {
+                        if (bet.size < 5) {
+                            if (!bet.contains("Красное")) {
+                                bet.add("Красное")
+                            } else {
+                                Log.d("RedPick", "Элемент уже существует в списке")
+                            }
+                        } else {
+                            Log.d("RedPick", "Максимально количество ставок")
+                        }
+                    },
+                    colors = ButtonDefaults.buttonColors(Color(0xFFB22222)),
+                    modifier = Modifier.padding(end = 10.dp)
+                ) {
+                    Text(text = "Красное",
+                        color = Color.White)
+                }
+                Text(
+                    text = "Вы поставили на: ",
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(top = 190.dp, start = 10.dp),
+                    fontSize = 20.sp,
+                    color = Color.Black,
+                    fontWeight = FontWeight.Bold,
+                )
+                Text(
+                    text = bet.joinToString(separator = ", "),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(start = 16.dp),
+                    fontSize = 18.sp,
+                    color = Color.Black,
+                    fontWeight = FontWeight.Bold,
+                )
+            }
         }
         // Кнопка для запуска вращения
         Button(
