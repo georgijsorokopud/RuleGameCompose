@@ -1,14 +1,12 @@
 package com.gosha.rulegamecompose.ruleScreen
 
 import android.util.Log
-import android.widget.Toast
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -31,30 +29,29 @@ import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.gosha.rulegamecompose.R
 import com.gosha.rulegamecompose.utils.ValueList
-import com.gosha.rulegamecompose.utils.BetList
 import kotlin.math.roundToInt
 
 @Composable
 fun RuleScreen() {
+
     // Состояние для значения вращения
-    var rotationValue by remember {
-        mutableStateOf(0f)
-    }
+    var rotationValue by remember { mutableStateOf(0f) }
 
     // Состояние для выбранного номера
-    var number by remember {
-        mutableStateOf(0)
-    }
+    var number by remember { mutableStateOf(0) }
 
-    // состояние для отрисовки ставки
-    val bet = remember {
-        mutableStateListOf<String>()
-    }
+    // Состояние для отрисовки ставки
+    val bet = remember { mutableStateListOf<String>() }
+
+    // Состояние для текста победы или поражения
+    var winLose by remember { mutableStateOf("") }
+
+    // Состояние для цвета текста победы или поражения
+    var winLoseColor by remember { mutableStateOf(Color.White) }
 
     // Анимация вращения с длительностью 2000 мс
     val angle: Float by animateFloatAsState(
@@ -74,9 +71,39 @@ fun RuleScreen() {
             } else {
                 Log.e("RuleScreen", "Index out of bounds: $index")
             }
+            val color = ValueList.colors[index]
+            // Проверяем, был ли цвет черным и делаем проверку ставки
+            if (number == 0) { // Индекс 0 соответствует номеру 1 (нулю на рулетке)
+                if (bet.isNotEmpty()) {
+                    winLose = ""
+                    winLoseColor = Color(0xFFDA4343) // Красный цвет для поражения
+                } else {
+                    winLose = ""
+                }
+            } else {
+                if (color == Color.Black) {
+                    if (bet.contains("Черное")) {
+                        winLose = "Победа"
+                        winLoseColor = Color(0xFF44DA43)
+                    } else {
+                        winLose = "Поражение"
+                        winLoseColor = Color(0xFFDA4343)
+                    }
+                } else if (color == Color.Red) {
+                    if (bet.contains("Красное")) {
+                        winLose = "Победа"
+                        winLoseColor = Color(0xFF44DA43)
+                    } else {
+                        winLose = "Поражение"
+                        winLoseColor = Color(0xFFDA4343)
+                    }
+                } else {
+                    winLose = ""
+                    winLoseColor = Color(0xFFDA4343)
+                }
+            }
         }
     )
-
     Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.SpaceBetween
@@ -112,14 +139,14 @@ fun RuleScreen() {
                 Modifier
                     .width(300.dp)
                     .height(300.dp)
-                    .padding(start = 10.dp)
                     .rotate(angle)
             )
             // Неподвижное изображение указателя
             Image(
                 painter = painterResource(R.drawable.pointer),
                 contentDescription = "Pointer",
-                Modifier.padding(start = 10.dp).width(300.dp)
+                Modifier
+                    .width(300.dp)
                     .height(300.dp)
             )
             Column(
@@ -130,38 +157,48 @@ fun RuleScreen() {
                 Button(
                     onClick = {
                         if (bet.size < 5) {
-                            if (!bet.contains("Черное")) {
+                            // Если в списке есть элемент "Красное", не добавляем "Черное"
+                            if (bet.contains("Красное")) {
+                                Log.d("BlackPick", "Элемент 'Красное' уже существует в списке. Нельзя добавить 'Черное'.")
+                            } else if (!bet.contains("Черное")) {
                                 bet.add("Черное")
                             } else {
-                                Log.d("BlackPick", "Элемент уже существует в списке")
+                                Log.d("BlackPick", "Элемент 'Черное' уже существует в списке.")
                             }
                         } else {
-                            Log.d("BlackPick", "максимально кол-во ставок")
+                            Log.d("BlackPick", "Максимально количество ставок.")
                         }
                     },
                     colors = ButtonDefaults.buttonColors(Color.Black),
                     modifier = Modifier.padding(end = 14.dp)
                 ) {
-                    Text(text = "Черное",
-                        color = Color.White)
+                    Text(
+                        text = "Черное",
+                        color = Color.White
+                    )
                 }
                 Button(
                     onClick = {
                         if (bet.size < 5) {
-                            if (!bet.contains("Красное")) {
+                            // Если в списке есть элемент "Черное", не добавляем "Красное"
+                            if (bet.contains("Черное")) {
+                                Log.d("RedPick", "Элемент 'Черное' уже существует в списке. Нельзя добавить 'Красное'.")
+                            } else if (!bet.contains("Красное")) {
                                 bet.add("Красное")
                             } else {
-                                Log.d("RedPick", "Элемент уже существует в списке")
+                                Log.d("RedPick", "Элемент 'Красное' уже существует в списке.")
                             }
                         } else {
-                            Log.d("RedPick", "Максимально количество ставок")
+                            Log.d("RedPick", "Максимально количество ставок.")
                         }
                     },
                     colors = ButtonDefaults.buttonColors(Color(0xFFB22222)),
                     modifier = Modifier.padding(end = 10.dp)
                 ) {
-                    Text(text = "Красное",
-                        color = Color.White)
+                    Text(
+                        text = "Красное",
+                        color = Color.White
+                    )
                 }
                 Text(
                     text = "Вы поставили на: ",
@@ -179,6 +216,15 @@ fun RuleScreen() {
                         .padding(start = 16.dp),
                     fontSize = 18.sp,
                     color = Color.Black,
+                    fontWeight = FontWeight.Bold,
+                )
+                Text(
+                    text = winLose,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(start = 16.dp),
+                    fontSize = 18.sp,
+                    color = winLoseColor,
                     fontWeight = FontWeight.Bold,
                 )
             }

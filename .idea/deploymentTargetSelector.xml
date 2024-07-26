@@ -4,13 +4,10 @@
     <selectionStates>
       <SelectionState runConfigName="app">
         <option name="selectionMode" value="DROPDOWN" />
-        <DropdownSelection timestamp="2024-07-23T20:00:13.361201100Z">
+        <DropdownSelection timestamp="2024-07-25T04:40:42.570490800Z">
           <Target type="DEFAULT_BOOT">
-            <handle>
-              <DeviceId pluginId="FirebaseDirectAccess" identifier="reservation=projects/fir-notificationdemo-b1dd5/deviceSessions/session-x51m5u2bhoefa" />
-            </handle>
             <template>
-              <DeviceId pluginId="FirebaseDirectAccess" type="TEMPLATE" identifier="model_id=oriole/31" />
+              <DeviceId pluginId="FirebaseDirectAccess" type="TEMPLATE" identifier="model_id=bluejay/32" />
             </template>
           </Target>
         </DropdownSelection>
