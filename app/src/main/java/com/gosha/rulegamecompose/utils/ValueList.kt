@@ -40,7 +40,7 @@ object ValueList {
         12,
         35,
         3,
-        2,
+        26,
     )
 
     val colors = listOf(

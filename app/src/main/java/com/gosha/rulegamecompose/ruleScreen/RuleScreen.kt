@@ -73,35 +73,41 @@ fun RuleScreen() {
             }
             val color = ValueList.colors[index]
             // Проверяем, был ли цвет черным и делаем проверку ставки
-            if (number == 0) { // Индекс 0 соответствует номеру 1 (нулю на рулетке)
-                if (bet.isNotEmpty()) {
+            if (color == Color.Black) {
+                if (bet.contains("Черное")) {
+                    winLose = "Победа"
+                    winLoseColor = Color(0xFF44DA43)
+                } else if (bet.isEmpty()) {
                     winLose = ""
-                    winLoseColor = Color(0xFFDA4343) // Красный цвет для поражения
+                    winLoseColor = Color(0xFFDA4343)
                 } else {
-                    winLose = ""
+                    winLose = "Поражение"
+                    winLoseColor = Color(0xFFDA4343)
                 }
-            } else {
-                if (color == Color.Black) {
-                    if (bet.contains("Черное")) {
-                        winLose = "Победа"
-                        winLoseColor = Color(0xFF44DA43)
-                    } else {
-                        winLose = "Поражение"
-                        winLoseColor = Color(0xFFDA4343)
-                    }
-                } else if (color == Color.Red) {
-                    if (bet.contains("Красное")) {
-                        winLose = "Победа"
-                        winLoseColor = Color(0xFF44DA43)
-                    } else {
-                        winLose = "Поражение"
-                        winLoseColor = Color(0xFFDA4343)
-                    }
-                } else {
+            } else if (color == Color.Red) {
+                if (bet.contains("Красное")) {
+                    winLose = "Победа"
+                    winLoseColor = Color(0xFF44DA43)
+                } else if (bet.isEmpty()) {
                     winLose = ""
+                    winLoseColor = Color(0xFFDA4343)
+                } else {
+                    winLose = "Поражение"
+                    winLoseColor = Color(0xFFDA4343)
+                }
+            } else if (color == Color.Green) {
+                if (bet.contains("Зеленое")) {
+                    winLose = "Победа"
+                    winLoseColor = Color(0xFF44DA43)
+                } else if (bet.isEmpty()) {
+                    winLose = ""
+                    winLoseColor = Color(0xFFDA4343)
+                } else {
+                    winLose = "Поражение"
                     winLoseColor = Color(0xFFDA4343)
                 }
             }
+
         }
     )
     Column(
@@ -159,14 +165,17 @@ fun RuleScreen() {
                         if (bet.size < 5) {
                             // Если в списке есть элемент "Красное", не добавляем "Черное"
                             if (bet.contains("Красное")) {
-                                Log.d("BlackPick", "Элемент 'Красное' уже существует в списке. Нельзя добавить 'Черное'.")
+                                Log.d(
+                                    "Pick",
+                                    "Элемент 'Красное' уже существует в списке. Нельзя добавить 'Черное'."
+                                )
                             } else if (!bet.contains("Черное")) {
                                 bet.add("Черное")
                             } else {
-                                Log.d("BlackPick", "Элемент 'Черное' уже существует в списке.")
+                                Log.d("Pick", "Элемент 'Черное' уже существует в списке.")
                             }
                         } else {
-                            Log.d("BlackPick", "Максимально количество ставок.")
+                            Log.d("Pick", "Максимально количество ставок.")
                         }
                     },
                     colors = ButtonDefaults.buttonColors(Color.Black),
@@ -182,14 +191,17 @@ fun RuleScreen() {
                         if (bet.size < 5) {
                             // Если в списке есть элемент "Черное", не добавляем "Красное"
                             if (bet.contains("Черное")) {
-                                Log.d("RedPick", "Элемент 'Черное' уже существует в списке. Нельзя добавить 'Красное'.")
+                                Log.d(
+                                    "Pick",
+                                    "Элемент 'Черное' уже существует в списке. Нельзя добавить 'Красное'."
+                                )
                             } else if (!bet.contains("Красное")) {
                                 bet.add("Красное")
                             } else {
-                                Log.d("RedPick", "Элемент 'Красное' уже существует в списке.")
+                                Log.d("Pick", "Элемент 'Красное' уже существует в списке.")
                             }
                         } else {
-                            Log.d("RedPick", "Максимально количество ставок.")
+                            Log.d("Pick", "Максимально количество ставок.")
                         }
                     },
                     colors = ButtonDefaults.buttonColors(Color(0xFFB22222)),
