@@ -79,6 +79,7 @@ object ValueList {
         Color.Black,
         Color.Red,
         Color.Black,
-        Color.Red
+        Color.Red,
+        Color.Black,
     )
 }

@@ -25,7 +25,7 @@ class MainActivity : ComponentActivity() {
                 }
                 Surface(
                     modifier = Modifier.fillMaxSize(),
-                    color = Color(0xFF228B22)
+                    color = Color(0xFF0f6d39)
                 ) {
                     RuleScreen()
                 }
